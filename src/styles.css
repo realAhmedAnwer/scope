@@ -1,4 +1,14 @@
-@import "tailwindcss";
-@import "flowbite/src/themes/default";
+@import url('https://fonts.googleapis.com/css2?family=SN+Pro:ital,wght@0,200..900;1,200..900&display=swap');
+@import 'tailwindcss';
+@import 'flowbite/src/themes/default';
 @plugin "flowbite/plugin";
 @source "../node_modules/flowbite";
+
+@theme {
+  --color-mainColor: #00298d;
+  --color-secondColor: #f0f2f5;
+}
+
+body {
+  font-family: 'SN Pro', sans-serif;
+}
