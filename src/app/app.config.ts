@@ -8,7 +8,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes, withInMemoryScrolling(), withHashLocation()),
+    provideRouter(routes, withInMemoryScrolling({ scrollPositionRestoration: "top" }), withHashLocation()),
     provideHttpClient(withFetch())
   ]
 };
