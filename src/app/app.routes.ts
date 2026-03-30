@@ -5,6 +5,9 @@ import { MainLayoutComponent } from './layout/main-layout/main-layout.component'
 import { ProfileComponent } from './features/profile/profile.component';
 import { NotFoundComponent } from './features/not-found/not-found.component';
 import { NotificationComponent } from './features/notification/notification.component';
+import { AuthLayoutComponent } from './layout/auth-layout/auth-layout.component';
+import { authGuard } from '@core/auth/guards/auth-guard';
+import { guestGuard } from '@core/auth/guards/guest-guard';
 
 export const routes: Routes = [
   {
@@ -14,13 +17,14 @@ export const routes: Routes = [
   },
   {
     path: '',
-    loadComponent: () =>
-      import('./layout/auth-layout/auth-layout.component').then((c) => c.AuthLayoutComponent),
+    component: AuthLayoutComponent,
+    canActivate: [guestGuard],
     children: [...authRoutes],
   },
   {
     path: '',
     component: MainLayoutComponent,
+    canActivate: [authGuard],
     children: [
       {
         path: 'feed',
