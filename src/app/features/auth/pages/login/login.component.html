@@ -62,11 +62,13 @@
           >Password</label
         >
         @if (loginForm.get('password')?.touched && loginForm.get('password')?.invalid) {
-          @if (loginForm.get('password')?.hasError('required')) {
-            <p class="mt-1 text-xs font-semibold text-rose-600">Password is required.</p>
-          } @else if (loginForm.get('password')?.hasError('pattern')) {
-            <p class="mt-1 text-xs font-semibold text-rose-600">Invalid Password.</p>
-          }
+          <p class="mt-1 text-xs font-semibold text-rose-600">
+            @if (loginForm.get('password')?.hasError('required')) {
+              Password is required.
+            } @else if (loginForm.get('password')?.hasError('pattern')) {
+              Invalid Password.
+            }
+          </p>
         }
       </div>
       <button

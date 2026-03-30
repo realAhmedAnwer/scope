@@ -8,6 +8,7 @@ import { NotificationComponent } from './features/notification/notification.comp
 import { AuthLayoutComponent } from './layout/auth-layout/auth-layout.component';
 import { authGuard } from '@core/auth/guards/auth-guard';
 import { guestGuard } from '@core/auth/guards/guest-guard';
+import { ResetPasswordComponent } from '@features/auth/pages/reset-password/reset-password.component';
 
 export const routes: Routes = [
   {
@@ -40,6 +41,11 @@ export const routes: Routes = [
         path: 'notifications',
         component: NotificationComponent,
         title: 'Notifications',
+      },
+      {
+        path: 'reset-password',
+        component: ResetPasswordComponent,
+        title: 'Reset Password',
       },
     ],
   },
