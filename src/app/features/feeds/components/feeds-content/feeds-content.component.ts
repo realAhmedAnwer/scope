@@ -3,10 +3,11 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Post } from '@shared/models/post.interface';
 import { PostsService } from '@shared/services/posts.service';
 import { PostCommentsComponent } from './components/post-comments/post-comments.component';
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-feeds-content',
-  imports: [ReactiveFormsModule, PostCommentsComponent],
+  imports: [ReactiveFormsModule, PostCommentsComponent, RouterLink],
   templateUrl: './feeds-content.component.html',
   styleUrl: './feeds-content.component.css',
 })

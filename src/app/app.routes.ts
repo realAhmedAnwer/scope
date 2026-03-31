@@ -9,6 +9,7 @@ import { AuthLayoutComponent } from './layout/auth-layout/auth-layout.component'
 import { authGuard } from '@core/auth/guards/auth-guard';
 import { guestGuard } from '@core/auth/guards/guest-guard';
 import { ResetPasswordComponent } from '@features/auth/pages/reset-password/reset-password.component';
+import { PostDetailsComponent } from '@features/post-details/post-details.component';
 
 export const routes: Routes = [
   {
@@ -46,6 +47,11 @@ export const routes: Routes = [
         path: 'reset-password',
         component: ResetPasswordComponent,
         title: 'Reset Password',
+      },
+      {
+        path: 'post/:id',
+        component: PostDetailsComponent,
+        title: 'Post Details',
       },
     ],
   },
