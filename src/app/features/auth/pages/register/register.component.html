@@ -90,8 +90,7 @@
         @if (registerForm.get('email')?.touched && registerForm.get('email')?.invalid) {
           @if (registerForm.get('email')?.hasError('required')) {
             <p class="mt-1 text-xs font-semibold text-rose-600">Email is required.</p>
-          }
-          @else if (registerForm.get('email')?.hasError('email')) {
+          } @else if (registerForm.get('email')?.hasError('email')) {
             <p class="mt-1 text-xs font-semibold text-rose-600">Invalid Email.</p>
           }
         }
@@ -123,8 +122,7 @@
         @if (registerForm.get('password')?.touched && registerForm.get('password')?.invalid) {
           @if (registerForm.get('password')?.hasError('required')) {
             <p class="mt-1 text-xs font-semibold text-rose-600">Password is required.</p>
-          }
-          @else if (registerForm.get('password')?.hasError('pattern')) {
+          } @else if (registerForm.get('password')?.hasError('pattern')) {
             <p class="mt-1 text-xs font-semibold text-rose-600">Invalid Password.</p>
           }
         }
@@ -156,8 +154,7 @@
         @if (registerForm.get('rePassword')?.touched && registerForm.get('rePassword')?.invalid) {
           @if (registerForm.get('rePassword')?.hasError('required')) {
             <p class="mt-1 text-xs font-semibold text-rose-600">Confirm Password is required.</p>
-          }
-          @else if (registerForm.get('rePassword')?.hasError('misMatch')) {
+          } @else if (registerForm.get('rePassword')?.hasError('misMatch')) {
             <p class="mt-1 text-xs font-semibold text-rose-600">
               Confirm Password doesn't match Password.
             </p>
@@ -242,13 +239,7 @@
           <i class="fas fa-spinner fa-spin"></i>
         }
       </button>
-      <div
-        class="mt-4 rounded-xl border border-rose-200 bg-rose-50 px-4 py-2.5 text-sm font-semibold text-rose-700"
-        [class]="{ hidden: !serverErrorMessage }"
-        role="alert"
-      >
-        {{ serverErrorMessage }}
-      </div>
+
       <button
         routerLink="/login"
         type="button"

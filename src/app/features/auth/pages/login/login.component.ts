@@ -31,7 +31,6 @@ export class LoginComponent {
   serverErrorMessage: string = '';
 
   login() {
-    this.serverErrorMessage = '';
     if (this.loginForm.valid) {
       this.isLoading = true;
       this.registerSubscription.unsubscribe();
@@ -45,7 +44,6 @@ export class LoginComponent {
         },
         error: (err: HttpErrorResponse) => {
           this.isLoading = false;
-          this.serverErrorMessage = err.error.message;
         },
         complete: () => {
           this.isLoading = false;

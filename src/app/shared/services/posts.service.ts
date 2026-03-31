@@ -9,35 +9,20 @@ import { Observable } from 'rxjs';
 })
 export class PostsService {
   private readonly _httpClient = inject(HttpClient);
-  headers: object = {
-    headers: {
-      AUTHORIZATION: `Bearer ${localStorage.getItem('accessToken')}`,
-    },
-  };
 
   getAllPosts(): Observable<any> {
-    return this._httpClient.get(`${environment.baseUrl}/${API_ENDPOINTS.posts.all}`, this.headers);
+    return this._httpClient.get(`${environment.baseUrl}/${API_ENDPOINTS.posts.all}`);
   }
 
   getPost(id: string): Observable<any> {
-    return this._httpClient.get(
-      `${environment.baseUrl}/${API_ENDPOINTS.posts.single(id)}`,
-      this.headers,
-    );
+    return this._httpClient.get(`${environment.baseUrl}/${API_ENDPOINTS.posts.single(id)}`);
   }
 
   createPost(data: FormData): Observable<any> {
-    return this._httpClient.post(
-      `${environment.baseUrl}/${API_ENDPOINTS.posts.create}`,
-      data,
-      this.headers,
-    );
+    return this._httpClient.post(`${environment.baseUrl}/${API_ENDPOINTS.posts.create}`, data);
   }
 
   deletePost(id: string): Observable<any> {
-    return this._httpClient.delete(
-      `${environment.baseUrl}/${API_ENDPOINTS.posts.delete(id)}`,
-      this.headers,
-    );
+    return this._httpClient.delete(`${environment.baseUrl}/${API_ENDPOINTS.posts.delete(id)}`);
   }
 }

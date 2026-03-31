@@ -57,7 +57,6 @@ export class RegisterComponent {
   }
 
   register(): void {
-    this.serverErrorMessage = '';
     if (this.registerForm.valid) {
       this.isLoading = true;
       this.registerSubscription.unsubscribe();
@@ -72,7 +71,6 @@ export class RegisterComponent {
           },
           error: (err: HttpErrorResponse) => {
             this.isLoading = false;
-            this.serverErrorMessage = err.error.message;
           },
           complete: () => {
             this.isLoading = false;

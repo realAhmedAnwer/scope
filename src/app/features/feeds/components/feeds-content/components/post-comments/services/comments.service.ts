@@ -10,24 +10,14 @@ import { Observable } from 'rxjs';
 export class CommentsService {
   private readonly _httpClient = inject(HttpClient);
 
-  headers: object = {
-    headers: {
-      AUTHORIZATION: `Bearer ${localStorage.getItem('accessToken')}`,
-    },
-  };
-
   getComments(postId: string): Observable<any> {
-    return this._httpClient.get(
-      `${environment.baseUrl}/${API_ENDPOINTS.comments.all(postId)}`,
-      this.headers,
-    );
+    return this._httpClient.get(`${environment.baseUrl}/${API_ENDPOINTS.comments.all(postId)}`);
   }
 
   createComment(postId: string, data: FormData) {
     return this._httpClient.post(
       `${environment.baseUrl}/${API_ENDPOINTS.comments.create(postId)}`,
       data,
-      this.headers,
     );
   }
 }
