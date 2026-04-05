@@ -25,6 +25,7 @@ Scope is a modern, fully-featured social media application built with **Angular*
 ## 🛠️ Technology Stack
 
 *   **Framework**: [Angular 20](https://angular.dev) (Leveraging modern control flow syntax `@if`, `@for`, and `@defer` for optimal loading).
+*   **TypeScript Path Aliasing**: Configured clean import architectures (e.g., `@core/`, `@shared/`, `@env/`) to avoid complex relative paths.
 *   **Styling**: [Tailwind CSS](https://tailwindcss.com/) directly integrated for a responsive, glassmorphic, and highly cohesive UI design.
 *   **Icons**: FontAwesome.
 *   **Forms**: ReactiveForms for highly robust input validation and handling.
