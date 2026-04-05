@@ -1,59 +1,61 @@
-# Scope
+# Scope 🌐
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.14.
+Scope is a modern, fully-featured social media application built with **Angular** and styled beautifully using **Tailwind CSS**. It provides a seamless and responsive platform for users to create posts, interact with friends, and discover new communities.
 
-## Development server
+## ✨ Features
 
-To start a local development server, run:
+### Authenticated Experience
+*   **Secure Authentication**: Fully integrated register and login system using JWT.
+*   **Custom User Profiles**: Manage your personal identity, upload responsive profile avatars, and view your account details all in one dedicated space.
 
+### Dynamic Timeline & Engagement
+*   **Infinite Scrolling Feed**: Explore endless content with a high-performance timeline that fetches new posts dynamically as you reach the bottom of the page.
+*   **Rich Post Creation**: Create posts with customizable privacy levels (Public, Followers, Only Me) and directly upload media (images/videos) natively.
+*   **Post Management**: Users can edit their own posts, securely delete them, or alter privacy post-publication.
+*   **Full Engagement Control**: interact with any post using instant, optimistic UI updates for:
+    *   ❤️ **Likes** (with a dedicated modal to see exactly who liked a post)
+    *   💬 **Comments & Threads** (multi-level nested replies on any post)
+    *   🔖 **Bookmarks** (save posts into a personalized reading list timeline)
+    *   🔄 **Shares**
+
+### Discovery
+*   **Sidebar Suggestions**: A dynamic right-side panel that recommends new people to follow with one-click follow integration to expand your social network.
+*   **Targeted Feeds**: Toggle views between "Explore", "Timeline", and "Bookmarks" to easily filter exactly what you want to see.
+
+## 🛠️ Technology Stack
+
+*   **Framework**: [Angular](https://angular.dev) (Leveraging modern control flow syntax `@if`, `@for`, and `@defer` for optimal loading).
+*   **Styling**: [Tailwind CSS](https://tailwindcss.com/) directly integrated for a responsive, glassmorphic, and highly cohesive UI design.
+*   **Icons**: FontAwesome.
+*   **Forms**: ReactiveForms for highly robust input validation and handling.
+*   **Routing**: Angular Router handling deep-linking and guarded authenticated routes.
+*   **Backend API**: Integrated Posts API logic.
+
+## 🚀 Getting Started
+
+### Prerequisites
+Make sure you have [Node.js](https://nodejs.org/) installed on your machine.
+
+### Installation
+
+1. Clone the repository and navigate to the project root.
+2. Install the application dependencies:
 ```bash
+npm install
+```
+
+### Development Server
+To start the local development server, run:
+```bash
+npm run dev
+# OR 
 ng serve
 ```
+Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
+### Build
+To build the project for production, run:
 ```bash
-ng generate component component-name
+npm run build
 ```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+This will compile the application and store the optimized build artifacts in the `dist/` directory.
