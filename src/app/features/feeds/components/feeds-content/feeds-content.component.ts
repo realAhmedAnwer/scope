@@ -1,42 +1,158 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, Input, OnChanges, OnInit, SimpleChanges, HostListener } from '@angular/core';
+import { DatePipe } from '@angular/common';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FeedNavPayload } from '../../feed-nav.types';
 import { Post } from '@shared/models/post.interface';
 import { PostsService } from '@shared/services/posts.service';
 import { PostCommentsComponent } from './components/post-comments/post-comments.component';
-import { RouterLink } from "@angular/router";
+import { RouterLink } from '@angular/router';
+import { PostEngagementBarComponent } from '@shared/components/post-engagement-bar/post-engagement-bar.component';
+import { PostLikesModalComponent } from '@shared/components/post-likes-modal/post-likes-modal.component';
+import { EditPostDialogComponent } from '@shared/components/edit-post-dialog/edit-post-dialog.component';
 
 @Component({
   selector: 'app-feeds-content',
-  imports: [ReactiveFormsModule, PostCommentsComponent, RouterLink],
+  imports: [
+    ReactiveFormsModule,
+    PostCommentsComponent,
+    RouterLink,
+    PostEngagementBarComponent,
+    PostLikesModalComponent,
+    EditPostDialogComponent,
+    DatePipe
+  ],
   templateUrl: './feeds-content.component.html',
-  styleUrl: './feeds-content.component.css',
 })
-export class FeedsContentComponent implements OnInit {
+export class FeedsContentComponent implements OnInit, OnChanges {
   private readonly _postsService = inject(PostsService);
+
+  @Input() nav: FeedNavPayload = { view: 'timeline', only: 'all' };
 
   public content: FormControl = new FormControl('');
   public privacy: FormControl = new FormControl('public');
   public file!: File;
 
   public userId: string = '';
+  public currentUser: any = null;
   public posts: Post[] = [];
   public imagePreviewUrl: string | ArrayBuffer | null | undefined;
 
-  ngOnInit(): void {
-    this.userId = JSON.parse(localStorage.getItem('user')!)?._id;
-    this.getFeedPosts();
+  likesForPostId: string | null = null;
+  editingPost: Post | null = null;
+
+  page = 1;
+  loadingPosts = false;
+  hasMorePosts = true;
+
+  @HostListener('window:scroll')
+  onScroll(): void {
+    if (this.loadingPosts || !this.hasMorePosts) return;
+    
+    const pos = Math.ceil(window.innerHeight + window.scrollY);
+    const max = document.documentElement.scrollHeight;
+    
+    if (pos >= max) {
+      this.page++;
+      this.loadPosts(true);
+    }
   }
 
-  getFeedPosts(): void {
-    this._postsService.getAllPosts().subscribe({
+  ngOnInit(): void {
+    this.currentUser = JSON.parse(localStorage.getItem('user') ?? 'null');
+    this.userId = this.currentUser?._id ?? '';
+    this.loadPosts();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['nav'] && !changes['nav'].firstChange) {
+      this.loadPosts();
+    }
+  }
+
+  get showComposer(): boolean {
+    return this.nav.view === 'timeline';
+  }
+
+  loadPosts(append = false): void {
+    if (!append) {
+      this.page = 1;
+      this.hasMorePosts = true;
+      this.posts = [];
+    }
+    if (!this.hasMorePosts) return;
+
+    this.loadingPosts = true;
+
+    if (this.nav.view === 'explore') {
+      this._postsService.getAllPosts().subscribe({
+        next: (res) => {
+          this.posts = res?.data?.posts ?? [];
+          this.loadingPosts = false;
+          this.hasMorePosts = false;
+        },
+      });
+      return;
+    }
+    if (this.nav.view === 'bookmarks') {
+      this._postsService.getBookmarkedPosts().subscribe({
+        next: (res) => {
+          this.posts = res?.data?.bookmarks ?? [];
+          this.loadingPosts = false;
+          this.hasMorePosts = false;
+        },
+      });
+      return;
+    }
+    this._postsService.getFeedPosts(this.nav.only, this.page).subscribe({
       next: (res) => {
-        this.posts = res.data.posts;
-        console.log(this.posts);
-      },
-      error: (err) => {
-        console.log(err);
+        const fetched = res?.data?.posts ?? [];
+        if (append) {
+          this.posts = [...this.posts, ...fetched];
+        } else {
+          this.posts = fetched;
+        }
+        if (fetched.length === 0) {
+          this.hasMorePosts = false;
+        }
+        this.loadingPosts = false;
       },
     });
+  }
+
+  onPostUpdated(updated: Post): void {
+    const i = this.posts.findIndex((p) => p._id === updated._id);
+    if (i >= 0) {
+      const newPosts = [...this.posts];
+      newPosts[i] = updated;
+      this.posts = newPosts;
+    }
+  }
+
+  closeLikes(): void {
+    this.likesForPostId = null;
+  }
+
+  closeEditor(): void {
+    this.editingPost = null;
+  }
+
+  onEdited(saved: Post): void {
+    this.onPostUpdated(saved);
+  }
+
+  bookmarkFromMenu(post: Post, ev: Event): void {
+    ev.stopPropagation();
+    this._postsService.toggleBookmark(post._id).subscribe({
+      next: (res) => {
+        const p = res?.data?.post;
+        if (p) this.onPostUpdated(p);
+      },
+    });
+  }
+
+  openEditFromMenu(post: Post, ev: Event): void {
+    ev.stopPropagation();
+    this.editingPost = post;
   }
 
   selectImage(e: Event): void {
@@ -61,11 +177,8 @@ export class FeedsContentComponent implements OnInit {
           const form = e.target as HTMLFormElement;
           form.reset();
           this.imagePreviewUrl = '';
-          this.getFeedPosts();
+          this.loadPosts();
         }
-      },
-      error: (err) => {
-        console.log(err);
       },
     });
   }
@@ -73,9 +186,8 @@ export class FeedsContentComponent implements OnInit {
   deletePost(id: string): void {
     this._postsService.deletePost(id).subscribe({
       next: (res) => {
-        if (res.success) this.getFeedPosts();
+        if (res.success) this.loadPosts();
       },
-      error: (err) => {},
     });
   }
 

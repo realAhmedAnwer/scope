@@ -1,11 +1,39 @@
-import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, inject, OnInit } from '@angular/core';
+import { UsersService } from '@core/services/users.service';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-feeds-side-right',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './feeds-side-right.component.html',
-  styleUrl: './feeds-side-right.component.css',
 })
-export class FeedsSideRightComponent {
+export class FeedsSideRightComponent implements OnInit {
+  private readonly _usersService = inject(UsersService);
 
+  suggestions: any[] = [];
+  suggestionsReady = false;
+
+  ngOnInit(): void {
+    this.loadSuggestions();
+  }
+
+  loadSuggestions(): void {
+    this._usersService
+      .getSuggestions(1, 8)
+      .pipe(finalize(() => (this.suggestionsReady = true)))
+      .subscribe({
+        next: (res) => {
+          this.suggestions = res?.data?.users ?? res?.data?.suggestions ?? [];
+        },
+      });
+  }
+
+  followUser(userId: string): void {
+    this._usersService.toggleFollow(userId).subscribe({
+      next: (res) => {
+        this.suggestions = this.suggestions.filter(u => u._id !== userId);
+      }
+    });
+  }
 }

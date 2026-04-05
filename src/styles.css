@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=SN+Pro:ital,wght@0,200..900;1,200..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
 @import 'tailwindcss';
 @import 'flowbite/src/themes/default';
 @plugin "flowbite/plugin";
@@ -9,12 +9,25 @@
 }
 
 @theme {
-  --color-mainColor: #00298d;
-  --color-mainColor-strong: #001f6b;
-  --color-secondColor: #f0f2f5;
+  --color-mainColor: #a78bfa;
+  --color-mainColor-strong: #7c3aed;
+  --color-secondColor: transparent;
 }
 
 body {
-  font-family: 'SN Pro', sans-serif;
-  background-color: var(--color-secondColor);
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  min-height: 100vh;
+  color: #e2e8f0;
+  background-color: #050816;
+  background-image:
+    radial-gradient(ellipse 1200px 700px at 0% -25%, rgba(139, 92, 246, 0.5), transparent 55%),
+    radial-gradient(ellipse 900px 520px at 100% 0%, rgba(34, 211, 238, 0.16), transparent 52%),
+    radial-gradient(ellipse 840px 520px at 50% 115%, rgba(217, 70, 239, 0.14), transparent 48%);
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background-color: rgba(167, 139, 250, 0.35);
+  color: #f8fafc;
 }

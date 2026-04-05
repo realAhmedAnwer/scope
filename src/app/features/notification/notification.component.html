@@ -1,1 +1,79 @@
-<p>notification works!</p>
+<section class="mx-auto max-w-3xl px-3 py-4 md:px-6 md:py-6">
+  <div
+    class="rounded-3xl border border-white/10 bg-white/[0.06] p-4 shadow-2xl shadow-black/30 backdrop-blur-2xl md:p-6"
+  >
+    <div class="flex flex-wrap items-start justify-between gap-3">
+      <div>
+        <p class="text-xs font-bold uppercase tracking-[0.2em] text-cyan-300/80">Inbox</p>
+        <h1 class="mt-1 text-2xl font-extrabold tracking-tight text-white">Notifications</h1>
+        <p class="mt-1 text-sm text-slate-400">Mentions, likes, comments, and follows.</p>
+      </div>
+
+      <button
+        type="button"
+        (click)="markAllRead()"
+        class="cursor-pointer rounded-xl border border-white/15 bg-white/5 px-4 py-2 text-sm font-bold text-slate-100 transition hover:bg-white/10"
+      >
+        Mark all read
+      </button>
+    </div>
+
+    <div class="mt-5">
+      @if (!hasLoaded) {
+        <div class="min-h-28"></div>
+      } @else if (notifications.length === 0) {
+        <div class="rounded-2xl border border-dashed border-white/15 bg-slate-950/30 py-10 text-center text-sm text-slate-500">
+          No notifications yet.
+        </div>
+      } @else {
+        <ul class="divide-y divide-white/10">
+          @for (n of notifications; track n._id) {
+            <li class="flex gap-3 py-4">
+              <img
+                class="h-11 w-11 shrink-0 rounded-2xl border border-white/10 object-cover"
+                [src]="n?.from?.photo || '/assets/avatar.png'"
+                [alt]="n?.from?.name || 'user'"
+              />
+
+              <div class="min-w-0 flex-1">
+                <div class="flex flex-wrap items-center gap-2">
+                  <span class="truncate font-extrabold text-slate-50">{{ n?.from?.name || 'Someone' }}</span>
+                  <span class="text-xs text-slate-500">{{ n?.createdAt ? (n.createdAt | date: 'medium') : '' }}</span>
+
+                  @if (n?.isRead === false) {
+                    <span
+                      class="rounded-full bg-gradient-to-r from-rose-500 to-orange-500 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white"
+                      >New</span
+                    >
+                  }
+                </div>
+
+                <p class="mt-1 text-sm leading-relaxed text-slate-300">
+                  {{ n?.message || n?.type || 'Notification' }}
+                </p>
+
+                @if (n?.entity?.post?._id) {
+                  <a
+                    class="mt-2 inline-flex items-center gap-1 text-sm font-bold text-violet-300 hover:text-violet-200 hover:underline"
+                    [routerLink]="['/post', n.entity.post._id]"
+                    >Open post <i class="fa-solid fa-arrow-right text-xs"></i
+                  ></a>
+                }
+              </div>
+
+              @if (n?.isRead === false) {
+                <button
+                  type="button"
+                  (click)="markRead(n._id)"
+                  class="shrink-0 self-start cursor-pointer rounded-xl border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-bold text-slate-200 transition hover:bg-white/10"
+                >
+                  Mark read
+                </button>
+              }
+            </li>
+          }
+        </ul>
+      }
+    </div>
+  </div>
+</section>

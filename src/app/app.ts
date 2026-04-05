@@ -6,7 +6,6 @@ import { NgxSpinnerModule } from 'ngx-spinner';
   selector: 'app-root',
   imports: [RouterOutlet, NgxSpinnerModule],
   templateUrl: './app.html',
-  styleUrl: './app.css',
 })
 export class App {
 

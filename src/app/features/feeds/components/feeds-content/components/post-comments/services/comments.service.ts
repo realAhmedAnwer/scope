@@ -10,14 +10,47 @@ import { Observable } from 'rxjs';
 export class CommentsService {
   private readonly _httpClient = inject(HttpClient);
 
-  getComments(postId: string): Observable<any> {
-    return this._httpClient.get(`${environment.baseUrl}/${API_ENDPOINTS.comments.all(postId)}`);
+  getComments(postId: string, page: number = 1, limit: number = 10): Observable<any> {
+    return this._httpClient.get(`${environment.baseUrl}/${API_ENDPOINTS.comments.all(postId, page, limit)}`);
   }
 
-  createComment(postId: string, data: FormData) {
+  createComment(postId: string, data: FormData): Observable<any> {
     return this._httpClient.post(
       `${environment.baseUrl}/${API_ENDPOINTS.comments.create(postId)}`,
       data,
+    );
+  }
+
+  getReplies(postId: string, commentId: string, page: number = 1, limit: number = 10): Observable<any> {
+    return this._httpClient.get(
+      `${environment.baseUrl}/${API_ENDPOINTS.comments.replies(postId, commentId, page, limit)}`,
+    );
+  }
+
+  createReply(postId: string, commentId: string, data: FormData): Observable<any> {
+    return this._httpClient.post(
+      `${environment.baseUrl}/${API_ENDPOINTS.comments.createReply(postId, commentId)}`,
+      data,
+    );
+  }
+
+  updateComment(postId: string, commentId: string, data: FormData): Observable<any> {
+    return this._httpClient.put(
+      `${environment.baseUrl}/${API_ENDPOINTS.comments.update(postId, commentId)}`,
+      data,
+    );
+  }
+
+  deleteComment(postId: string, commentId: string): Observable<any> {
+    return this._httpClient.delete(
+      `${environment.baseUrl}/${API_ENDPOINTS.comments.delete(postId, commentId)}`,
+    );
+  }
+
+  toggleCommentLike(postId: string, commentId: string): Observable<any> {
+    return this._httpClient.put(
+      `${environment.baseUrl}/${API_ENDPOINTS.comments.toggleLike(postId, commentId)}`,
+      {},
     );
   }
 }

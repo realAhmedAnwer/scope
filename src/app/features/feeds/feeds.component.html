@@ -1,7 +1,7 @@
-<section>
-  <div class="container grid lg:grid-cols-[220px_minmax(0,1fr)_320px] gap-4 items-start">
-    <app-feeds-side-left></app-feeds-side-left>
-    <app-feeds-content></app-feeds-content>
+<section class="pb-8">
+  <div class="container grid items-start gap-4 lg:grid-cols-[220px_minmax(0,1fr)_340px]">
+    <app-feeds-side-left (navChange)="onNavChange($event)"></app-feeds-side-left>
+    <app-feeds-content [nav]="nav"></app-feeds-content>
     <app-feeds-side-right></app-feeds-side-right>
   </div>
 </section>

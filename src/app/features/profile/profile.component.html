@@ -1,1 +1,94 @@
-<p>profile works!</p>
+<section class="mx-auto max-w-4xl px-3 py-4 md:px-6 md:py-6">
+  <div
+    class="rounded-3xl border border-white/10 bg-white/[0.06] p-4 shadow-2xl shadow-black/30 backdrop-blur-2xl md:p-7"
+  >
+    <div class="flex flex-wrap items-start justify-between gap-3">
+      <div>
+        <p class="text-xs font-bold uppercase tracking-[0.2em] text-violet-300/80">Account</p>
+        <h1 class="mt-1 text-2xl font-extrabold tracking-tight text-white md:text-3xl">Profile</h1>
+        <p class="mt-1 text-sm text-slate-400">Manage your Scope identity and photo.</p>
+      </div>
+      <button
+        type="button"
+        (click)="loadProfile()"
+        class="cursor-pointer rounded-xl border border-white/15 bg-white/5 px-4 py-2 text-sm font-bold text-slate-100 transition hover:bg-white/10"
+      >
+        Refresh
+      </button>
+    </div>
+
+    @if (!profileReady) {
+      <div class="mt-6 min-h-48"></div>
+    } @else {
+      <div class="mt-7 flex flex-col gap-6 md:flex-row">
+        <div class="shrink-0 md:w-64">
+          <div class="rounded-3xl border border-white/10 bg-slate-950/30 p-4">
+            <img
+              class="mx-auto h-32 w-32 rounded-3xl border border-white/10 object-cover ring-2 ring-violet-500/25"
+              [src]="profile?.photo || '/assets/avatar.png'"
+              [alt]="profile?.name || 'user'"
+            />
+
+            <div class="mt-4 text-center">
+              <div class="text-lg font-extrabold text-white">{{ profile?.name || '—' }}</div>
+              <div class="text-sm text-violet-200/90">@{{ profile?.username || '—' }}</div>
+            </div>
+
+            <div class="mt-4">
+              <input (change)="onSelectPhoto($event)" type="file" accept="image/*" id="photo" class="hidden" />
+              <label
+                for="photo"
+                class="flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-violet-500 to-fuchsia-500 px-3 py-2.5 text-sm font-extrabold text-white shadow-lg shadow-violet-500/20 hover:brightness-110"
+              >
+                <i class="fa-regular fa-image"></i>
+                @if (photoUploading) {
+                  Uploading…
+                } @else {
+                  Change photo
+                }
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="min-w-0 flex-1">
+          <div class="grid gap-4 sm:grid-cols-2">
+            <div class="rounded-2xl border border-white/10 bg-slate-950/35 p-4">
+              <div class="text-xs font-extrabold uppercase tracking-wider text-slate-500">Email</div>
+              <div class="mt-2 break-words font-bold text-slate-100">{{ profile?.email || '—' }}</div>
+            </div>
+            <div class="rounded-2xl border border-white/10 bg-slate-950/35 p-4">
+              <div class="text-xs font-extrabold uppercase tracking-wider text-slate-500">Gender</div>
+              <div class="mt-2 font-bold text-slate-100">{{ profile?.gender || '—' }}</div>
+            </div>
+            <div class="rounded-2xl border border-white/10 bg-slate-950/35 p-4">
+              <div class="text-xs font-extrabold uppercase tracking-wider text-slate-500">
+                Date of birth
+              </div>
+              <div class="mt-2 font-bold text-slate-100">
+                {{ profile?.dateOfBirth ? (profile.dateOfBirth | date: 'mediumDate') : '—' }}
+              </div>
+            </div>
+            <div class="rounded-2xl border border-white/10 bg-slate-950/35 p-4">
+              <div class="text-xs font-extrabold uppercase tracking-wider text-slate-500">Joined</div>
+              <div class="mt-2 font-bold text-slate-100">
+                {{ profile?.createdAt ? (profile.createdAt | date: 'mediumDate') : '—' }}
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="mt-6 rounded-2xl border border-violet-400/20 bg-gradient-to-br from-violet-500/10 to-fuchsia-500/5 p-4"
+          >
+            <div class="font-extrabold text-slate-50">Security</div>
+            <p class="mt-2 text-sm leading-relaxed text-slate-400">
+              To change your password, open <span class="font-bold text-violet-200">Settings</span> from
+              the navbar.
+            </p>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+</section>
+

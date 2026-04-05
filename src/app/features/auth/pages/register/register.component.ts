@@ -15,7 +15,6 @@ import { Router, RouterLink } from '@angular/router';
   selector: 'app-register',
   imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './register.component.html',
-  styleUrl: './register.component.css',
 })
 export class RegisterComponent {
   private readonly _authService = inject(AuthService);
