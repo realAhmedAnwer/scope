@@ -4,14 +4,14 @@
     (click)="close()"
     role="dialog"
     aria-modal="true"
-    aria-label="People who liked this post"
+    [attr.aria-label]="'POST.LIKES_TITLE' | translate"
   >
     <div
       class="max-h-[85vh] w-full max-w-md overflow-hidden rounded-3xl border border-white/10 bg-slate-950/95 shadow-2xl backdrop-blur-xl"
       (click)="$event.stopPropagation()"
     >
       <div class="flex items-center justify-between border-b border-white/10 px-4 py-3">
-        <h2 class="text-lg font-extrabold text-white">Likes</h2>
+        <h2 class="text-lg font-extrabold text-white">{{ 'POST.LIKES_TITLE' | translate }}</h2>
         <button
           type="button"
           (click)="close()"
@@ -37,7 +37,7 @@
             </div>
           </li>
         } @empty {
-          <li class="px-3 py-8 text-center text-sm text-slate-500">No likes yet.</li>
+          <li class="px-3 py-8 text-center text-sm text-slate-500">{{ 'POST.NO_LIKES' | translate }}</li>
         }
       </ul>
       @if (hasMore && users.length > 0) {
@@ -47,7 +47,7 @@
             (click)="loadMore()"
             class="w-full rounded-xl border border-white/15 bg-white/5 py-2 text-sm font-bold text-slate-200 hover:bg-white/10"
           >
-            Load more
+            {{ 'POST.LOAD_MORE' | translate }}
           </button>
         </div>
       }

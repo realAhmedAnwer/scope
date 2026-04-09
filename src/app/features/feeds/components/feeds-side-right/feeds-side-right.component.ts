@@ -2,10 +2,11 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { UsersService } from '@core/services/users.service';
 import { finalize } from 'rxjs';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-feeds-side-right',
-  imports: [CommonModule],
+  imports: [CommonModule, TranslatePipe],
   templateUrl: './feeds-side-right.component.html',
 })
 export class FeedsSideRightComponent implements OnInit {

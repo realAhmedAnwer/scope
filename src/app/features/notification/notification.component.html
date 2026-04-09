@@ -4,9 +4,9 @@
   >
     <div class="flex flex-wrap items-start justify-between gap-3">
       <div>
-        <p class="text-xs font-bold uppercase tracking-[0.2em] text-cyan-300/80">Inbox</p>
-        <h1 class="mt-1 text-2xl font-extrabold tracking-tight text-white">Notifications</h1>
-        <p class="mt-1 text-sm text-slate-400">Mentions, likes, comments, and follows.</p>
+        <p class="text-xs font-bold uppercase tracking-[0.2em] text-cyan-300/80">{{ 'NOTIFICATIONS.INBOX' | translate }}</p>
+        <h1 class="mt-1 text-2xl font-extrabold tracking-tight text-white">{{ 'NOTIFICATIONS.TITLE' | translate }}</h1>
+        <p class="mt-1 text-sm text-slate-400">{{ 'NOTIFICATIONS.SUBTITLE' | translate }}</p>
       </div>
 
       <button
@@ -14,7 +14,7 @@
         (click)="markAllRead()"
         class="cursor-pointer rounded-xl border border-white/15 bg-white/5 px-4 py-2 text-sm font-bold text-slate-100 transition hover:bg-white/10"
       >
-        Mark all read
+        {{ 'NOTIFICATIONS.MARK_ALL_READ' | translate }}
       </button>
     </div>
 
@@ -23,7 +23,7 @@
         <div class="min-h-28"></div>
       } @else if (notifications.length === 0) {
         <div class="rounded-2xl border border-dashed border-white/15 bg-slate-950/30 py-10 text-center text-sm text-slate-500">
-          No notifications yet.
+          {{ 'NOTIFICATIONS.NO_NOTIFICATIONS' | translate }}
         </div>
       } @else {
         <ul class="divide-y divide-white/10">
@@ -37,13 +37,13 @@
 
               <div class="min-w-0 flex-1">
                 <div class="flex flex-wrap items-center gap-2">
-                  <span class="truncate font-extrabold text-slate-50">{{ n?.from?.name || 'Someone' }}</span>
+                  <span class="truncate font-extrabold text-slate-50">{{ n?.from?.name || ('NOTIFICATIONS.SOMEONE' | translate) }}</span>
                   <span class="text-xs text-slate-500">{{ n?.createdAt ? (n.createdAt | date: 'medium') : '' }}</span>
 
                   @if (n?.isRead === false) {
                     <span
                       class="rounded-full bg-gradient-to-r from-rose-500 to-orange-500 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white"
-                      >New</span
+                      >{{ 'NOTIFICATIONS.NEW' | translate }}</span
                     >
                   }
                 </div>
@@ -56,7 +56,7 @@
                   <a
                     class="mt-2 inline-flex items-center gap-1 text-sm font-bold text-violet-300 hover:text-violet-200 hover:underline"
                     [routerLink]="['/post', n.entity.post._id]"
-                    >Open post <i class="fa-solid fa-arrow-right text-xs"></i
+                    >{{ 'NOTIFICATIONS.OPEN_POST' | translate }} <i class="fa-solid fa-arrow-right text-xs"></i
                   ></a>
                 }
               </div>
@@ -67,7 +67,7 @@
                   (click)="markRead(n._id)"
                   class="shrink-0 self-start cursor-pointer rounded-xl border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-bold text-slate-200 transition hover:bg-white/10"
                 >
-                  Mark read
+                  {{ 'NOTIFICATIONS.MARK_READ' | translate }}
                 </button>
               }
             </li>

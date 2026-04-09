@@ -1,50 +1,46 @@
 <section class="relative flex min-h-screen items-center justify-center p-4 md:p-10">
-  <div
-    class="pointer-events-none absolute -left-20 top-24 h-72 w-72 rounded-full bg-violet-600/30 blur-3xl md:left-10"
-  ></div>
-  <div
-    class="pointer-events-none absolute -right-16 bottom-20 h-64 w-64 rounded-full bg-cyan-500/20 blur-3xl md:right-10"
-  ></div>
+  <div class="pointer-events-none absolute -left-20 top-24 h-72 w-72 rounded-full bg-violet-600/30 blur-3xl md:left-10"></div>
+  <div class="pointer-events-none absolute -right-16 bottom-20 h-64 w-64 rounded-full bg-cyan-500/20 blur-3xl md:right-10"></div>
 
   <div class="relative w-full max-w-md">
-    <div class="mb-8 text-center md:text-left">
-      <p class="text-xs font-bold uppercase tracking-[0.22em] text-violet-300/90">Scope</p>
-      <h1 class="mt-2 text-3xl font-extrabold tracking-tight text-white md:text-4xl">Welcome back</h1>
-      <p class="mt-2 text-sm text-slate-400">Sign in to continue to your feed.</p>
+    <div class="mb-6 md:mb-8">
+      <p class="text-xs font-bold uppercase tracking-[0.22em] text-violet-300/90">
+        {{ 'AUTH.SCOPE' | translate }}
+      </p>
+      <h1 class="mt-2 text-3xl font-extrabold tracking-tight text-white md:text-4xl">
+        {{ 'AUTH.WELCOME_BACK' | translate }}
+      </h1>
+      <p class="mt-2 text-sm text-slate-400">
+        {{ 'AUTH.SUBTITLE' | translate }}
+      </p>
     </div>
 
-    <div
-      class="rounded-3xl border border-white/10 bg-white/[0.07] p-6 shadow-2xl shadow-black/40 backdrop-blur-2xl md:p-8"
-    >
+    <div class="rounded-3xl border border-white/10 bg-white/[0.07] p-6 shadow-2xl shadow-black/40 backdrop-blur-2xl md:p-8">
       <form [formGroup]="loginForm" (ngSubmit)="login()" class="space-y-6">
+        
         <div class="group relative z-0 w-full">
           <input
             type="text"
-            name="login"
             formControlName="login"
             id="floating_login"
             placeholder=""
             class="peer block w-full appearance-none border-0 border-b-2 border-white/20 bg-transparent py-3 text-sm text-slate-100 focus:border-violet-400 focus:outline-none focus:ring-0"
-            [class]="{
-              'border-emerald-400': loginForm.get('login')?.valid,
-              'border-rose-500': loginForm.get('login')?.touched && loginForm.get('login')?.invalid,
-            }"
+            [class.border-emerald-400]="loginForm.get('login')?.valid"
+            [class.border-rose-500]="loginForm.get('login')?.touched && loginForm.get('login')?.invalid"
           />
           <label
             for="floating_login"
             class="absolute top-3 -z-10 origin-[0] -translate-y-5 scale-75 transform text-sm text-slate-400 duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:start-0 peer-focus:-translate-y-5 peer-focus:scale-75 peer-focus:text-violet-300"
-            [class]="{
-              'text-emerald-400': loginForm.get('login')?.valid,
-              'text-rose-500': loginForm.get('login')?.touched && loginForm.get('login')?.invalid,
-            }"
-            >Email or Username</label
           >
+            {{ 'AUTH.EMAIL' | translate }}
+          </label>
+
           @if (loginForm.get('login')?.touched && loginForm.get('login')?.invalid) {
             <p class="mt-1 text-xs font-semibold text-rose-400">
               @if (loginForm.get('login')?.hasError('required')) {
-                Email or Username is required.
+                {{ 'AUTH.ERRORS.EMAIL_REQUIRED' | translate }}
               } @else if (loginForm.get('login')?.hasError('minlength')) {
-                Min length is 3.
+                {{ 'AUTH.ERRORS.NAME_MINLENGTH' | translate }}
               }
             </p>
           }
@@ -53,33 +49,26 @@
         <div class="group relative z-0 w-full">
           <input
             type="password"
-            name="password"
             formControlName="password"
             id="floating_password"
             placeholder=" "
             class="peer block w-full appearance-none border-0 border-b-2 border-white/20 bg-transparent py-3 text-sm text-slate-100 focus:border-violet-400 focus:outline-none focus:ring-0"
-            [class]="{
-              'border-emerald-400': loginForm.get('password')?.valid,
-              'border-rose-500':
-                loginForm.get('password')?.touched && loginForm.get('password')?.invalid,
-            }"
+            [class.border-emerald-400]="loginForm.get('password')?.valid"
+            [class.border-rose-500]="loginForm.get('password')?.touched && loginForm.get('password')?.invalid"
           />
           <label
             for="floating_password"
             class="absolute top-3 -z-10 origin-[0] -translate-y-5 scale-75 transform text-sm text-slate-400 duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:start-0 peer-focus:-translate-y-5 peer-focus:scale-75 peer-focus:text-violet-300"
-            [class]="{
-              'text-emerald-400': loginForm.get('password')?.valid,
-              'text-rose-500':
-                loginForm.get('password')?.touched && loginForm.get('password')?.invalid,
-            }"
-            >Password</label
           >
+            {{ 'AUTH.PASSWORD' | translate }}
+          </label>
+
           @if (loginForm.get('password')?.touched && loginForm.get('password')?.invalid) {
             <p class="mt-1 text-xs font-semibold text-rose-400">
               @if (loginForm.get('password')?.hasError('required')) {
-                Password is required.
+                {{ 'AUTH.ERRORS.PASSWORD_REQUIRED' | translate }}
               } @else if (loginForm.get('password')?.hasError('pattern')) {
-                Invalid Password.
+                {{ 'AUTH.ERRORS.PASSWORD_PATTERN' | translate }}
               }
             </p>
           }
@@ -89,17 +78,18 @@
           type="submit"
           class="w-full cursor-pointer rounded-xl bg-gradient-to-r from-violet-500 to-fuchsia-500 py-3 font-extrabold text-white shadow-lg shadow-violet-500/30 transition hover:brightness-110 disabled:opacity-60"
         >
-          Login
+          {{ 'AUTH.LOGIN_BUTTON' | translate }}
           @if (isLoading) {
             <i class="fas fa-spinner fa-spin ms-2"></i>
           }
         </button>
+
         <button
           routerLink="/register"
           type="button"
           class="w-full cursor-pointer rounded-xl border border-white/15 bg-white/5 py-3 font-extrabold text-slate-100 transition hover:bg-white/10"
         >
-          Create new account
+          {{ 'AUTH.CREATE_ACCOUNT' | translate }}
         </button>
       </form>
     </div>

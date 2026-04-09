@@ -1,11 +1,12 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FeedNavPayload } from '../../feed-nav.types';
+import { TranslatePipe } from '@ngx-translate/core';
 
 export type SideSelection = 'feed-all' | 'feed-me' | 'feed-following' | 'explore' | 'bookmarks';
 
 @Component({
   selector: 'app-feeds-side-left',
-  imports: [],
+  imports: [TranslatePipe],
   templateUrl: './feeds-side-left.component.html',
 })
 export class FeedsSideLeftComponent {

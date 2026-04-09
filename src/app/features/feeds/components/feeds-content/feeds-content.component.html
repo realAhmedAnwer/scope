@@ -25,9 +25,9 @@
               [formControl]="privacy"
               class="cursor-pointer border-none bg-transparent py-0 pl-2 text-xs text-slate-200 ring-0"
             >
-              <option value="public">public</option>
-              <option value="following">followers</option>
-              <option value="only_me">only me</option>
+              <option value="public">{{ 'POST.PUBLIC' | translate }}</option>
+              <option value="following">{{ 'POST.FOLLOWERS' | translate }}</option>
+              <option value="only_me">{{ 'POST.ONLY_ME' | translate }}</option>
             </select>
           </div>
         </div>
@@ -37,7 +37,7 @@
         <textarea
           [formControl]="content"
           class="min-h-30 w-full resize-y rounded-2xl border border-white/10 bg-slate-950/45 p-3.5 text-[15px] text-slate-100 placeholder-slate-500 transition focus:border-violet-400/50 focus:outline-none focus:ring-2 focus:ring-violet-500/20"
-          placeholder="What's on your mind…?"
+          placeholder="{{ 'POST.WHATS_ON_YOUR_MIND' | translate }}"
           aria-label="Create a new post"
         ></textarea>
       </div>
@@ -58,14 +58,14 @@
           class="group flex cursor-pointer items-center gap-2 rounded-xl px-2 py-2 text-slate-400 transition hover:bg-white/10 hover:text-slate-200"
         >
           <i class="fa-regular fa-image text-lg text-emerald-400 transition group-hover:scale-110"></i>
-          <span class="text-[14px] font-semibold">Photo / video</span>
+          <span class="text-[14px] font-semibold">{{ 'POST.PHOTO_VIDEO' | translate }}</span>
         </label>
 
         <button
           type="submit"
           class="flex cursor-pointer items-center gap-2 rounded-xl bg-gradient-to-r from-violet-500 to-fuchsia-500 px-5 py-2.5 text-[14px] font-bold text-white shadow-lg shadow-violet-500/25 transition hover:brightness-110"
         >
-          Post
+          {{ 'POST.POST_BTN' | translate }}
           <i class="fa-regular fa-paper-plane text-sm"></i>
         </button>
       </div>
@@ -102,11 +102,11 @@
                   [disabled]="post.user._id !== this.userId"
                   class="max-w-[7rem] cursor-pointer border-none bg-transparent py-0.5 pl-1 text-[11px] text-slate-300 ring-0"
                 >
-                  <option [selected]="post.privacy === 'public'" value="public">public</option>
+                  <option [selected]="post.privacy === 'public'" value="public">{{ 'POST.PUBLIC' | translate }}</option>
                   <option [selected]="post.privacy === 'following'" value="following">
-                    followers
+                    {{ 'POST.FOLLOWERS' | translate }}
                   </option>
-                  <option [selected]="post.privacy === 'only_me'" value="only_me">only me</option>
+                  <option [selected]="post.privacy === 'only_me'" value="only_me">{{ 'POST.ONLY_ME' | translate }}</option>
                 </select>
               </div>
             </div>
@@ -134,7 +134,7 @@
                   (click)="bookmarkFromMenu(post, $event)"
                   class="inline-flex w-full items-center rounded-xl p-2 hover:bg-white/10 hover:text-slate-100"
                 >
-                  {{ post.bookmarked ? 'Unsave' : 'Save post' }}
+                  {{ post.bookmarked ? ('POST.UNSAVE' | translate) : ('POST.SAVE_POST' | translate) }}
                 </button>
                 @if (post.user._id === this.userId) {
                   <button
@@ -142,14 +142,14 @@
                     (click)="openEditFromMenu(post, $event)"
                     class="inline-flex w-full items-center rounded-xl p-2 hover:bg-white/10 hover:text-slate-100"
                   >
-                    Edit post
+                    {{ 'POST.EDIT_POST' | translate }}
                   </button>
                   <button
                     type="button"
                     (click)="deletePost(post._id); $event.stopPropagation()"
                     class="inline-flex w-full items-center rounded-xl p-2 text-rose-400 hover:bg-rose-500/10"
                   >
-                    Delete post
+                    {{ 'POST.DELETE_POST' | translate }}
                   </button>
                 }
               </li>
@@ -187,7 +187,7 @@
             class="flex flex-1 cursor-pointer items-center justify-center gap-2 rounded-xl py-2.5 text-[14px] font-semibold text-slate-400 transition hover:bg-white/10 hover:text-slate-100"
           >
             <i class="fa-regular fa-message text-lg"></i>
-            Comment
+            {{ 'POST.COMMENT' | translate }}
           </button>
         </app-post-engagement-bar>
       </div>

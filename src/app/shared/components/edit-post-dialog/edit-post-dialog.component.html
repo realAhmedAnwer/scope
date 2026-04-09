@@ -4,14 +4,14 @@
     (click)="close()"
     role="dialog"
     aria-modal="true"
-    aria-label="Edit post"
+    [attr.aria-label]="'POST.EDIT_POST' | translate"
   >
     <div
       class="w-full max-w-lg overflow-hidden rounded-3xl border border-white/10 bg-slate-950/95 shadow-2xl backdrop-blur-xl"
       (click)="$event.stopPropagation()"
     >
       <div class="flex items-center justify-between border-b border-white/10 px-4 py-3">
-        <h2 class="text-lg font-extrabold text-white">Edit post</h2>
+        <h2 class="text-lg font-extrabold text-white">{{ 'POST.EDIT_POST' | translate }}</h2>
         <button
           type="button"
           (click)="close()"
@@ -26,15 +26,15 @@
           formControlName="body"
           rows="4"
           class="w-full rounded-2xl border border-white/10 bg-slate-950/50 p-3 text-slate-100 placeholder-slate-500 focus:border-violet-400/50 focus:outline-none focus:ring-2 focus:ring-violet-500/20"
-          placeholder="What's on your mind…?"
+          placeholder="{{ 'POST.WHATS_ON_YOUR_MIND' | translate }}"
         ></textarea>
         <select
           formControlName="privacy"
           class="w-full rounded-xl border border-white/10 bg-slate-950/50 p-2.5 text-slate-100"
         >
-          <option value="public">public</option>
-          <option value="following">followers</option>
-          <option value="only_me">only me</option>
+          <option value="public">{{ 'POST.PUBLIC' | translate }}</option>
+          <option value="following">{{ 'POST.FOLLOWERS' | translate }}</option>
+          <option value="only_me">{{ 'POST.ONLY_ME' | translate }}</option>
         </select>
         @if (preview) {
           <img [src]="preview" class="max-h-48 w-full rounded-2xl object-cover ring-1 ring-white/10" alt="" />
@@ -44,14 +44,14 @@
           <label
             for="edit-post-file"
             class="cursor-pointer rounded-xl border border-white/15 px-3 py-2 text-sm font-semibold text-slate-300 hover:bg-white/10"
-            >New image</label
+            >{{ 'POST.NEW_IMAGE' | translate }}</label
           >
         </div>
         <button
           type="submit"
           class="w-full rounded-xl bg-gradient-to-r from-violet-500 to-fuchsia-500 py-2.5 font-extrabold text-white shadow-lg shadow-violet-500/25"
         >
-          Save changes
+          {{ 'POST.SAVE_CHANGES' | translate }}
         </button>
       </form>
     </div>

@@ -3,10 +3,12 @@ import { Component, inject, OnInit } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '@core/auth/services/auth.service';
 import { NotificationsService } from '@core/services/notifications/notifications.service';
+import { LangSwitchComponent } from '@shared/components/lang-switch/lang-switch.component';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-navbar',
-  imports: [RouterLink, RouterLinkActive],
+  imports: [RouterLink, RouterLinkActive, LangSwitchComponent, TranslatePipe],
   templateUrl: './navbar.component.html',
 })
 export class NavbarComponent implements OnInit {

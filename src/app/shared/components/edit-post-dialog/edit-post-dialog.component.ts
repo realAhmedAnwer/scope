@@ -2,10 +2,11 @@ import { Component, EventEmitter, inject, Input, OnChanges, Output, SimpleChange
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Post } from '@shared/models/post.interface';
 import { PostsService } from '@shared/services/posts.service';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-edit-post-dialog',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, TranslatePipe],
   templateUrl: './edit-post-dialog.component.html',
 })
 export class EditPostDialogComponent implements OnChanges {

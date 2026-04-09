@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, inject, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { PostsService } from '@shared/services/posts.service';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-post-likes-modal',
-  imports: [CommonModule],
+  imports: [CommonModule, TranslatePipe],
   templateUrl: './post-likes-modal.component.html',
 })
 export class PostLikesModalComponent implements OnChanges {

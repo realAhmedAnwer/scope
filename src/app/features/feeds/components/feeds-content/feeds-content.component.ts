@@ -9,6 +9,7 @@ import { RouterLink } from '@angular/router';
 import { PostEngagementBarComponent } from '@shared/components/post-engagement-bar/post-engagement-bar.component';
 import { PostLikesModalComponent } from '@shared/components/post-likes-modal/post-likes-modal.component';
 import { EditPostDialogComponent } from '@shared/components/edit-post-dialog/edit-post-dialog.component';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-feeds-content',
@@ -19,7 +20,8 @@ import { EditPostDialogComponent } from '@shared/components/edit-post-dialog/edi
     PostEngagementBarComponent,
     PostLikesModalComponent,
     EditPostDialogComponent,
-    DatePipe
+    DatePipe,
+    TranslatePipe
   ],
   templateUrl: './feeds-content.component.html',
 })

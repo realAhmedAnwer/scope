@@ -20,7 +20,11 @@ Scope is a modern, fully-featured social media application built with **Angular*
 
 ### Discovery
 *   **Sidebar Suggestions**: A dynamic right-side panel that recommends new people to follow with one-click follow integration to expand your social network.
-*   **Targeted Feeds**: Toggle views between "Explore", "Timeline", and "Bookmarks" to easily filter exactly what you want to see.
+    *   **Targeted Feeds**: Toggle views between "Explore", "Timeline", and "Bookmarks" to easily filter exactly what you want to see.
+
+### Global Experience (i18n)
+*   **Multi-language Support**: Fully configured with `ngx-translate`, offering seamless dynamic switching between **English (EN)** and **Arabic (AR)** components.
+*   **RTL/LTR Support**: The UI automatically mirrors and respects correct document text flow (`rtl`/`ltr`) based on the active language.
 
 ## 🛠️ Technology Stack
 
@@ -31,6 +35,7 @@ Scope is a modern, fully-featured social media application built with **Angular*
 *   **Forms**: ReactiveForms for highly robust input validation and handling.
 *   **Routing**: Angular Router handling deep-linking and guarded authenticated routes.
 *   **Backend API**: Integrated Posts API logic.
+*   **Internationalization**: Leveraging `@ngx-translate` for real-time localization.
 
 ## 🚀 Getting Started
 

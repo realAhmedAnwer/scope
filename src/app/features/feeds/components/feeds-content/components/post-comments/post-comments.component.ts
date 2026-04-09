@@ -3,10 +3,11 @@ import { DatePipe } from '@angular/common';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { CommentsService } from './services/comments.service';
 import { Comment } from './models/comment.interface';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-post-comments',
-  imports: [ReactiveFormsModule, DatePipe],
+  imports: [ReactiveFormsModule, DatePipe, TranslatePipe],
   templateUrl: './post-comments.component.html',
 })
 export class PostCommentsComponent implements OnInit {

@@ -2,10 +2,11 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { Post } from '@shared/models/post.interface';
 import { PostsService } from '@shared/services/posts.service';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-post-engagement-bar',
-  imports: [CommonModule],
+  imports: [TranslatePipe],
   templateUrl: './post-engagement-bar.component.html',
 })
 export class PostEngagementBarComponent {

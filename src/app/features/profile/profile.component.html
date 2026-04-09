@@ -4,16 +4,16 @@
   >
     <div class="flex flex-wrap items-start justify-between gap-3">
       <div>
-        <p class="text-xs font-bold uppercase tracking-[0.2em] text-violet-300/80">Account</p>
-        <h1 class="mt-1 text-2xl font-extrabold tracking-tight text-white md:text-3xl">Profile</h1>
-        <p class="mt-1 text-sm text-slate-400">Manage your Scope identity and photo.</p>
+        <p class="text-xs font-bold uppercase tracking-[0.2em] text-violet-300/80">{{ 'PROFILE.ACCOUNT' | translate }}</p>
+        <h1 class="mt-1 text-2xl font-extrabold tracking-tight text-white md:text-3xl">{{ 'PROFILE.TITLE' | translate }}</h1>
+        <p class="mt-1 text-sm text-slate-400">{{ 'PROFILE.SUBTITLE' | translate }}</p>
       </div>
       <button
         type="button"
         (click)="loadProfile()"
         class="cursor-pointer rounded-xl border border-white/15 bg-white/5 px-4 py-2 text-sm font-bold text-slate-100 transition hover:bg-white/10"
       >
-        Refresh
+        {{ 'PROFILE.REFRESH' | translate }}
       </button>
     </div>
 
@@ -42,9 +42,9 @@
               >
                 <i class="fa-regular fa-image"></i>
                 @if (photoUploading) {
-                  Uploading…
+                  {{ 'PROFILE.UPLOADING' | translate }}
                 } @else {
-                  Change photo
+                  {{ 'PROFILE.CHANGE_PHOTO' | translate }}
                 }
               </label>
             </div>
@@ -54,23 +54,23 @@
         <div class="min-w-0 flex-1">
           <div class="grid gap-4 sm:grid-cols-2">
             <div class="rounded-2xl border border-white/10 bg-slate-950/35 p-4">
-              <div class="text-xs font-extrabold uppercase tracking-wider text-slate-500">Email</div>
+              <div class="text-xs font-extrabold uppercase tracking-wider text-slate-500">{{ 'PROFILE.EMAIL' | translate }}</div>
               <div class="mt-2 break-words font-bold text-slate-100">{{ profile?.email || '—' }}</div>
             </div>
             <div class="rounded-2xl border border-white/10 bg-slate-950/35 p-4">
-              <div class="text-xs font-extrabold uppercase tracking-wider text-slate-500">Gender</div>
+              <div class="text-xs font-extrabold uppercase tracking-wider text-slate-500">{{ 'PROFILE.GENDER' | translate }}</div>
               <div class="mt-2 font-bold text-slate-100">{{ profile?.gender || '—' }}</div>
             </div>
             <div class="rounded-2xl border border-white/10 bg-slate-950/35 p-4">
               <div class="text-xs font-extrabold uppercase tracking-wider text-slate-500">
-                Date of birth
+                {{ 'PROFILE.DOB' | translate }}
               </div>
               <div class="mt-2 font-bold text-slate-100">
                 {{ profile?.dateOfBirth ? (profile.dateOfBirth | date: 'mediumDate') : '—' }}
               </div>
             </div>
             <div class="rounded-2xl border border-white/10 bg-slate-950/35 p-4">
-              <div class="text-xs font-extrabold uppercase tracking-wider text-slate-500">Joined</div>
+              <div class="text-xs font-extrabold uppercase tracking-wider text-slate-500">{{ 'PROFILE.JOINED' | translate }}</div>
               <div class="mt-2 font-bold text-slate-100">
                 {{ profile?.createdAt ? (profile.createdAt | date: 'mediumDate') : '—' }}
               </div>
@@ -80,10 +80,9 @@
           <div
             class="mt-6 rounded-2xl border border-violet-400/20 bg-gradient-to-br from-violet-500/10 to-fuchsia-500/5 p-4"
           >
-            <div class="font-extrabold text-slate-50">Security</div>
+            <div class="font-extrabold text-slate-50">{{ 'PROFILE.SECURITY' | translate }}</div>
             <p class="mt-2 text-sm leading-relaxed text-slate-400">
-              To change your password, open <span class="font-bold text-violet-200">Settings</span> from
-              the navbar.
+              {{ 'PROFILE.SECURITY_MSG_1' | translate }}<span class="font-bold text-violet-200">{{ 'PROFILE.SECURITY_MSG_2' | translate }}</span> {{ 'PROFILE.SECURITY_MSG_3' | translate }}
             </p>
           </div>
         </div>

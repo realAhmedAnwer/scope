@@ -10,6 +10,8 @@
     </a>
 
     <div class="flex items-center gap-2 md:order-2 md:gap-3">
+      <app-lang-switch></app-lang-switch>
+
       <button
         type="button"
         class="flex rounded-full bg-white/5 p-0.5 ring-1 ring-white/10 transition hover:bg-white/10"
@@ -36,7 +38,7 @@
               routerLinkActive="bg-violet-500/15 text-violet-200"
               class="inline-flex w-full items-center gap-2 rounded-xl p-2.5 transition hover:bg-white/10 hover:text-slate-100"
             >
-              <i class="fa-solid fa-gear w-5 text-center text-violet-300"></i> Settings</a
+              <i class="fa-solid fa-gear w-5 text-center text-violet-300"></i> {{ 'NAVBAR.SETTINGS' | translate }}</a
             >
           </li>
           <li>
@@ -46,7 +48,7 @@
               class="inline-flex w-full cursor-pointer items-center gap-2 rounded-xl p-2.5 text-left transition hover:bg-white/10 hover:text-slate-100"
             >
               <i class="fa-solid fa-arrow-right-from-bracket w-5 text-center text-rose-300"></i>
-              Log out
+              {{ 'NAVBAR.LOGOUT' | translate }}
             </button>
           </li>
         </ul>
@@ -78,7 +80,7 @@
             class="flex items-center gap-2 rounded-xl px-4 py-2.5 text-slate-300 transition hover:bg-white/10 hover:text-slate-100 md:py-2"
             aria-current="page"
           >
-            <i class="fa-regular fa-house w-5 text-center text-violet-300"></i> Feed</a
+            <i class="fa-regular fa-house w-5 text-center text-violet-300"></i> {{ 'NAVBAR.FEED' | translate }}</a
           >
         </li>
         <li>
@@ -88,7 +90,7 @@
             class="flex items-center gap-2 rounded-xl px-4 py-2.5 text-slate-300 transition hover:bg-white/10 hover:text-slate-100 md:py-2"
             aria-current="page"
           >
-            <i class="fa-regular fa-user w-5 text-center text-cyan-300"></i> Profile</a
+            <i class="fa-regular fa-user w-5 text-center text-cyan-300"></i> {{ 'NAVBAR.PROFILE' | translate }}</a
           >
         </li>
         <li>
@@ -99,7 +101,7 @@
             aria-current="page"
           >
             <i class="fa-regular fa-comment w-5 text-center text-fuchsia-300"></i>
-            Notifications
+            {{ 'NAVBAR.NOTIFICATIONS' | translate }}
             @if (unreadCount > 0) {
               <span
                 class="ms-1 inline-flex min-h-5 min-w-5 items-center justify-center rounded-full bg-gradient-to-r from-rose-500 to-orange-500 px-1.5 text-[11px] font-bold text-white"
